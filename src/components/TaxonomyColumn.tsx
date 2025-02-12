@@ -36,7 +36,7 @@ const TaxonomyColumn: React.FC<TaxonomyColumnProps> = ({
   highlightedItems = new Set(),
 }) => {
   return (
-    <Card className="h-full w-[180px] bg-white p-4 flex flex-col">
+    <Card className="w-[180px] bg-white p-4 flex flex-col">
       <h3 className="text-lg font-semibold mb-4 text-center text-white bg-red-600 py-2 rounded-md">
         {title}
       </h3>

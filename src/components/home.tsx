@@ -18,7 +18,7 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="h-[800px] w-full rounded-lg border border-red-100 bg-white shadow-sm mb-8">
+        <div className="w-full rounded-lg border border-red-100 bg-white shadow-sm mb-8">
           <PortfolioGrid />
         </div>
       </div>

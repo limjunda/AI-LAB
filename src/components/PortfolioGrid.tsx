@@ -263,7 +263,7 @@ const PortfolioGrid: React.FC<PortfolioGridProps> = ({
         </Button>
       </div>
 
-      <div className="grid grid-cols-7 gap-4 h-[calc(100%-60px)]">
+      <div className="grid grid-cols-7 gap-4">
         <TaxonomyColumn
           title="Engineering Stack"
           items={data.engineeringStack}
