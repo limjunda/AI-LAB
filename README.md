@@ -1,3 +1,7 @@
+# Merge the node file for Docker
+
+'cat node20-slim.part_* > node20-slim.tar'
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
