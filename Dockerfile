@@ -3,8 +3,8 @@ FROM node:20-slim AS builder
 WORKDIR /app
 
 # Copy package files and install dependencies
-COPY package.json package-lock.json ./
-RUN npm ci --omit=dev  # Faster and ensures reproducible installs
+COPY package.json ./
+RUN npm install
 
 # Copy source code and build the app
 COPY . .
