@@ -7,7 +7,7 @@ const Header = () => {
         <img
           src="/Logo.png"
           alt="AI LAB Logo"
-          className="w-full h-24 object-contain"
+          className="w-full h-[542px] object-contain"
         />
       </div>
     </div>
