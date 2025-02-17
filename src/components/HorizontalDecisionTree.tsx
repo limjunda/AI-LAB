@@ -24,7 +24,7 @@ interface Column {
 const columns: Column[] = [
   {
     id: "entry",
-    title: "Entry Point",
+    title: "PII Data & LBU Data Residency Consideration",
     groups: [
       {
         title: "Strict Path",
@@ -405,8 +405,8 @@ export default function HorizontalDecisionTree() {
         <div className="grid grid-cols-7 gap-16">
           {columns.map((column) => (
             <div key={column.id} className="flex flex-col">
-              <div className="h-16 flex items-center justify-center">
-                <h3 className="text-lg font-semibold text-red-900 text-center">
+              <div className="h-20 flex items-center justify-center px-2 mb-2">
+                <h3 className="text-lg font-semibold text-red-900 text-center leading-tight">
                   {column.title}
                 </h3>
               </div>
