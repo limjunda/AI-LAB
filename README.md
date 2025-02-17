@@ -1,4 +1,133 @@
-# Merge the node file for Docker
+# AI Solutions Portfolio Navigator
+
+## AI Portfolio Page
+
+To update the AI Portfolio visualization with new items or connections:
+
+1. **Add New Items**
+   Update the `defaultData` object in `/src/components/PortfolioGrid.tsx`:
+   ```typescript
+   const defaultData = {
+     engineeringStack: [
+       {
+         id: "new_stack_item",
+         label: "New Engineering Stack Item",
+         connections: ["connected_usecase1", "connected_usecase2"]
+       }
+       // ... existing items
+     ],
+     businessUnits: [...],
+     humanAiInteraction: [...],
+     cloudServices: [...],
+     aiCapabilities: [...],
+     aiTasks: [...],
+     useCases: [...]
+   };
+   ```
+
+2. **Add New Connections**
+   - Add connection IDs to the `connections` array of existing items
+   - Connections are bi-directional, so they will highlight in both directions
+   - Example: Adding a new connection between an engineering stack item and a use case:
+     ```typescript
+     engineeringStack: [{
+       id: "existing_stack",
+       label: "Existing Stack Item",
+       connections: ["existing_connection", "new_usecase_id"] // Add new connection
+     }]
+     ```
+
+3. **Best Practices**
+   - Use clear, descriptive IDs that indicate the item's purpose
+   - Keep labels concise but informative
+   - Ensure all connections are valid (IDs exist in both directions)
+   - Group related items together in their respective columns
+
+## Deployment Flow Page
+
+
+### 1. Adding New Technology Icons
+
+1. Add the icon file to `/public/Icon/` directory
+   - Use SVG format for best quality
+   - Follow the naming convention: lowercase, hyphen-separated (e.g., `new-tech.svg`)
+
+2. Update the `iconMappings` array in `/src/components/TechnologyIcons.tsx`:
+   ```typescript
+   const iconMappings: IconMapping[] = [
+     // Add your new icon mapping
+     {
+       id: "new-tech",
+       icon: "/Icon/new-tech.svg",
+       items: ["item_id_1", "item_id_2"] // IDs of items that should highlight this icon
+     },
+     // ... existing mappings
+   ];
+   ```
+
+### 2. Adding New Flow Items
+
+Update the `columns` array in `/src/components/HorizontalDecisionTree.tsx`:
+
+1. Add new items to existing groups:
+   ```typescript
+   {
+     id: "existing_column_id",
+     groups: [{
+       title: "Group Title",
+       items: [
+         // Add your new item
+         {
+           id: "new_item_id",
+           label: "New Item Label",
+           nextIds: ["connected_item_1", "connected_item_2"]
+         },
+         // ... existing items
+       ]
+     }]
+   }
+   ```
+
+2. Or add a new column:
+   ```typescript
+   {
+     id: "new_column",
+     title: "New Column Title",
+     groups: [{
+       title: "Group Title",
+       items: [{
+         id: "new_item_id",
+         label: "New Item Label",
+         nextIds: ["connected_item_1", "connected_item_2"]
+       }]
+     }]
+   }
+   ```
+
+### 4. Best Practices
+
+1. **Icon Organization**:
+   - Keep icons organized by category in the `iconMappings` array
+   - Use clear, descriptive IDs
+   - Group related technologies together
+
+2. **Flow Items**:
+   - Maintain logical grouping in columns
+   - Use consistent naming for IDs
+   - Keep labels concise but descriptive
+
+3. **Decision Tree**:
+   - Ensure all paths are connected
+   - Provide clear, actionable options
+   - Keep decision text concise
+
+4. **Testing**:
+   - Test new connections in the flow
+   - Verify icon highlighting works
+   - Check decision tree navigation
+
+# Docker Setup Instructions
+
 ## 1. Save Docker images to tar files
 docker save -o node20-slim.tar node:20-slim
 docker save -o nginx-alpine.tar nginx:alpine

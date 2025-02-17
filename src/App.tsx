@@ -1,18 +1,27 @@
 import { Suspense } from "react";
-import { useRoutes, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./components/home";
-import routes from "tempo-routes";
+import HorizontalDecisionTree from "./components/HorizontalDecisionTree";
+import Navigation from "./components/Navigation";
+import UseCases from "./components/UseCases";
 
 function App() {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-        {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
-      </>
-    </Suspense>
+    <div className="min-h-screen flex flex-col bg-white">
+      <Navigation />
+      <div className="flex-1">
+        <Suspense fallback={<div className="p-4">Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/horizontal-tree"
+              element={<HorizontalDecisionTree />}
+            />
+            <Route path="/use-cases" element={<UseCases />} />
+          </Routes>
+        </Suspense>
+      </div>
+    </div>
   );
 }
 
