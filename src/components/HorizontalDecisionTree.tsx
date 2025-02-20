@@ -5,6 +5,7 @@ import { Badge } from "./ui/badge";
 import { ScrollArea } from "./ui/scroll-area";
 import { cn } from "@/lib/utils";
 import TechnologyIcons from "./TechnologyIcons";
+import TechSpecsTable from "./TechSpecsTable";
 
 interface ItemGroup {
   title: string;
@@ -58,7 +59,7 @@ const columns: Column[] = [
           {
             id: "native_hosting",
             label: "Native Hosting",
-            nextIds: ["data_server_lbu"],
+            nextIds: [],
           },
           {
             id: "cross_secure",
@@ -93,8 +94,8 @@ const columns: Column[] = [
         items: [
           {
             id: "data_server_lbu",
-            label: "Data Servers in LBU",
-            nextIds: ["data_masking"],
+            label: "Can take Flexible route",
+            nextIds: [],
           },
           {
             id: "data_server_lbu_2",
@@ -252,6 +253,7 @@ const columns: Column[] = [
 ];
 
 export default function HorizontalDecisionTree() {
+  const [showTechSpecs, setShowTechSpecs] = useState(false);
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
   const [activeConnections, setActiveConnections] = useState<Set<string>>(
     new Set(),
@@ -381,13 +383,23 @@ export default function HorizontalDecisionTree() {
           <h2 className="text-2xl font-bold text-red-900">
             AI Model Deployment Flow
           </h2>
-          <Button
-            variant="outline"
-            onClick={handleReset}
-            className="text-red-600 border-red-600 hover:bg-red-50"
-          >
-            Reset
-          </Button>
+          <div className="flex gap-4">
+            <Button
+              variant="outline"
+              onClick={() => setShowTechSpecs(true)}
+              className="text-green-600 border-green-600 hover:bg-green-50"
+              disabled={selectedItems.size === 0}
+            >
+              Generate Tech Specs
+            </Button>
+            <Button
+              variant="outline"
+              onClick={handleReset}
+              className="text-red-600 border-red-600 hover:bg-red-50"
+            >
+              Reset
+            </Button>
+          </div>
         </div>
         <p className="text-gray-600 mt-2">
           Click on items to explore different deployment paths and options.
@@ -439,9 +451,11 @@ export default function HorizontalDecisionTree() {
                                   ? "default"
                                   : "outline"
                               }
-                              className="w-full justify-center text-sm"
+                              className="w-full justify-center text-sm text-center"
                             >
-                              {item.label}
+                              <span className="block text-center w-full">
+                                {item.label}
+                              </span>
                             </Badge>
                           </div>
                         ))}
@@ -455,6 +469,7 @@ export default function HorizontalDecisionTree() {
         </div>
       </div>
       <TechnologyIcons activeItems={selectedItems} />
+      {showTechSpecs && <TechSpecsTable selectedItems={selectedItems} />}
     </div>
   );
 }

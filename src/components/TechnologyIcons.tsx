@@ -16,13 +16,7 @@ const iconMappings: IconMapping[] = [
   {
     id: "gcp",
     icon: "/Icon/google-cloud.svg",
-    items: [
-      "udp_storage",
-      "udp_storage_flex",
-      "native_hosting",
-      "cross_secure",
-      "data_server_lbu",
-    ],
+    items: ["udp_storage", "udp_storage_flex"],
   },
   {
     id: "bigquery",
@@ -125,33 +119,67 @@ const iconMappings: IconMapping[] = [
   },
 ];
 
+const iconGroups = [
+  {
+    title: "Storage & Data",
+    icons: ["gcp", "bigquery"],
+  },
+  {
+    title: "LLM & AI Services",
+    icons: ["huggingface", "meta", "mistral", "openai", "gemini"],
+  },
+  {
+    title: "Orchestration & Containers",
+    icons: ["docker", "gke"],
+  },
+  {
+    title: "Backend Services",
+    icons: ["cloud-functions", "cloud-run", "flask", "java"],
+  },
+  {
+    title: "Frontend & Development",
+    icons: ["firebase", "nodejs", "react"],
+  },
+];
+
 const TechnologyIcons: React.FC<TechnologyIconsProps> = ({ activeItems }) => {
   return (
     <div className="mt-8 p-4 bg-white rounded-lg border border-red-100">
       <h3 className="text-lg font-semibold text-red-900 mb-4 text-center">
         Technology Stack
       </h3>
-      <div className="flex justify-center gap-8 flex-wrap">
-        {iconMappings.map((mapping) => {
-          const isActive = Array.from(activeItems).some((item) =>
-            mapping.items.includes(item),
-          );
-          return (
-            <div
-              key={mapping.id}
-              className={cn(
-                "w-24 h-24 p-4 rounded-lg transition-all duration-200",
-                isActive ? "opacity-100" : "opacity-30",
-              )}
-            >
-              <img
-                src={mapping.icon}
-                alt={mapping.id}
-                className="w-full h-full object-contain"
-              />
+      <div className="grid grid-cols-5 gap-8">
+        {iconGroups.map((group) => (
+          <div key={group.title} className="space-y-4">
+            <h4 className="text-sm font-medium text-gray-500 text-center bg-gray-50 py-2 rounded-md">
+              {group.title}
+            </h4>
+            <div className="flex flex-col items-center gap-6">
+              {iconMappings
+                .filter((mapping) => group.icons.includes(mapping.id))
+                .map((mapping) => {
+                  const isActive = Array.from(activeItems).some((item) =>
+                    mapping.items.includes(item),
+                  );
+                  return (
+                    <div
+                      key={mapping.id}
+                      className={cn(
+                        "w-16 h-16 p-2 rounded-lg transition-all duration-200",
+                        isActive ? "opacity-100" : "opacity-30",
+                      )}
+                    >
+                      <img
+                        src={mapping.icon}
+                        alt={mapping.id}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  );
+                })}
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </div>
   );

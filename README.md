@@ -1,5 +1,93 @@
 # AI Solutions Portfolio Navigator
 
+## Deployment Flow Page
+
+The Deployment Flow page provides an interactive decision tree for AI model deployment paths, with technology stack visualization and technical specifications generation.
+
+### 1. Decision Tree Structure
+
+To update the decision tree in `/src/components/HorizontalDecisionTree.tsx`:
+
+```typescript
+const columns: Column[] = [
+  {
+    id: "entry",
+    title: "Section Title",
+    groups: [
+      {
+        title: "Group Title",
+        items: [
+          {
+            id: "unique_id",
+            label: "Display Label",
+            nextIds: ["connected_item_id1", "connected_item_id2"]
+          }
+        ]
+      }
+    ]
+  }
+];
+```
+
+### 2. Technology Stack Icons
+
+To update technology icons in `/src/components/TechnologyIcons.tsx`:
+
+1. Add new icon mapping:
+```typescript
+const iconMappings: IconMapping[] = [
+  {
+    id: "unique_id",
+    icon: "/Icon/icon-name.svg",
+    items: ["connected_decision_id1", "connected_decision_id2"]
+  }
+];
+```
+
+2. Add to icon groups:
+```typescript
+const iconGroups = [
+  {
+    title: "Group Title",
+    icons: ["icon_id1", "icon_id2"]
+  }
+];
+```
+
+### 3. Technical Specifications
+
+To update tech specs in `/src/components/TechSpecsTable.tsx`:
+
+```typescript
+const getTechSpecs = (selectedItems: Set<string>): SpecSection[] => {
+  const specs: SpecSection = {
+    title: "Section Title",
+    specs: {
+      "Spec Name": "Spec Value",
+      "Conditional Spec": selectedItems.has("item_id") ? "Value A" : "Value B"
+    }
+  };
+  return [specs];
+};
+```
+
+### 4. Best Practices
+
+1. **Decision Tree**:
+   - Keep IDs unique and descriptive
+   - Ensure all connections are valid
+   - Group related items together
+
+2. **Technology Icons**:
+   - Use SVG format for icons
+   - Place icons in `/public/Icon/` directory
+   - Follow naming convention: lowercase, hyphen-separated
+
+3. **Tech Specs**:
+   - Group related specifications
+   - Use conditional logic for path-specific specs
+   - Keep specifications clear and concise
+
 ## AI Portfolio Page
 
 To update the AI Portfolio visualization with new items or connections:
